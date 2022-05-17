@@ -653,6 +653,9 @@
     width: 28px;
     height: auto;
 }
+.nGY2GThumbnailIconsFullThumbnail {
+    display: none !important;
+}
 .custom-shape-divider-top-1651103212 {
     position: absolute;
     top: -2px;

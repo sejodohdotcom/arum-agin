@@ -1,8 +1,9 @@
 // Set the date we're counting down to
 var countDownDate = new Date("May 14, 2022 08:00:00").getTime();
+var currentDate = new Date().getTime();
 
 // Update the count down every 1 second
-var x = setInterval(function() {
+var x = setInterval(function () {
 
     // Get today's date and time
     var now = new Date().getTime();
@@ -32,9 +33,20 @@ var x = setInterval(function() {
     }
 }, 1000);
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $('body').addClass('loaded');
+    // $('body').addClass('loaded');
+
+    //===== Prealoder
+
+    window.onload = function () {
+        window.setTimeout(fadeout, 500);
+    }
+
+    function fadeout() {
+        document.querySelector('.preloader').style.opacity = '0';
+        document.querySelector('.preloader').style.display = 'none';
+    }
 
     var modalEnvelope = document.getElementById('open-envelope')
 
@@ -56,7 +68,7 @@ $(document).ready(function() {
     // window.addEventListener('scroll', () => {
     //     document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
     //   });
-    
+
     var current_Url = window.location.href;
     var convert_Url = new URL(current_Url);
     var get_Name = convert_Url.searchParams.get("to");
@@ -66,11 +78,11 @@ $(document).ready(function() {
     AOS.init({
         duration: 2000,
         mirror: false,
-        once: true
+        once: true,
     });
 
-    document.querySelector("#share-lock").onclick = function() {
-        window.open('https://www.google.com/maps/place/Joglo+Mudal+Wonosobo/@-7.3376468,109.9220937,17z/data=!3m1!4b1!4m5!3m4!1s0x2e7aa06c4e10ed1d:0x8f3ee8c8f739c0f7!8m2!3d-7.3376468!4d109.9220937', '_blank'); 
+    document.querySelector("#share-lock").onclick = function () {
+        window.open('https://www.google.com/maps/place/Joglo+Mudal+Wonosobo/@-7.3376468,109.9220937,17z/data=!3m1!4b1!4m5!3m4!1s0x2e7aa06c4e10ed1d:0x8f3ee8c8f739c0f7!8m2!3d-7.3376468!4d109.9220937', '_blank');
     };
 
 
@@ -80,14 +92,14 @@ $(document).ready(function() {
         loop: true,
     });
 
-      sound.play();
+    sound.play();
 
-    $('#btn-scroll').on('click', function(e) {
+    $('#btn-scroll').on('click', function (e) {
         e.preventDefault();
-        $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
-      });
+        $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top }, 500, 'linear');
+    });
 
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function (event) {
         var key = event.key || event.keyCode;
 
         if (key == 123) {
@@ -97,11 +109,11 @@ $(document).ready(function() {
         }
     }, false);
 
-    window.oncontextmenu = function() {
+    window.oncontextmenu = function () {
         return false;
     };
 
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function (event) {
         var key = event.key || event.keyCode;
 
         if (key == 123) {
@@ -112,7 +124,7 @@ $(document).ready(function() {
     }, false);
 
     // Prevent F12      
-    $(document).keydown(function(event) {
+    $(document).keydown(function (event) {
         if (event.keyCode == 123) { // Prevent F12
             return false;
         } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I        
@@ -135,7 +147,7 @@ $(document).ready(function() {
     }
 
     // prevent ctrl + s
-    $(document).bind('keydown', function(e) {
+    $(document).bind('keydown', function (e) {
         if (e.ctrlKey && (e.which == 83)) {
             e.preventDefault();
             return false;
@@ -152,8 +164,8 @@ $(document).ready(function() {
                 return (
 
                     '<div class="msg-wrapper">' +
-                    '                <p class="name-sender poppins bold white">' + item.name + '</p>' +
-                    '                <p class="msg-sender poppins white">' + item.message + '</p>' +
+                    '                <p class="name-sender poppins bold gold">' + item.name + '</p>' +
+                    '                <p class="msg-sender poppins gold">' + item.message + '</p>' +
                     '            </div> '
 
                 )
@@ -179,7 +191,7 @@ $(document).ready(function() {
         xhr.open("GET", url, true);
         xhr.send();
 
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
 
                 var data = JSON.parse(this.responseText);
@@ -199,7 +211,7 @@ $(document).ready(function() {
         xhr.open("GET", url, true);
         xhr.send();
 
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
 
                 var data = JSON.parse(this.responseText);
@@ -211,7 +223,7 @@ $(document).ready(function() {
     }
 
     var myModalEl = document.getElementById('modal-wishes');
-    myModalEl.addEventListener('hidden.bs.modal', function() {
+    myModalEl.addEventListener('hidden.bs.modal', function () {
         $("#error-text").html('');
         document.getElementById("form-wishes").reset();
     })
@@ -226,50 +238,54 @@ $(document).ready(function() {
     var form = document.getElementById('form-wishes');
     document.getElementById("send-messages").addEventListener("click", (e) => {
 
-        if (document.getElementById('floatingInput').value != '' &&
-            document.getElementById('floatingTextarea2').value != '') {
-            $("#send-messages").addClass("disabled");
-            $("#error-text").html('');
-            var request = new XMLHttpRequest();
-            var formData = new FormData(form);
+        if (countDownDate > currentDate) {
+            if (document.getElementById('floatingInput').value != '' &&
+                document.getElementById('floatingTextarea2').value != '') {
+                $("#send-messages").addClass("disabled");
+                $("#error-text").html('');
+                var request = new XMLHttpRequest();
+                var formData = new FormData(form);
 
-            var url = "https://api.npoint.io/e4192f970d76d714f4a9";
+                var url = "https://api.npoint.io/e4192f970d76d714f4a9";
 
-            request.open('POST', url, /* async = */ false);
-            request.setRequestHeader('Content-Type', 'application/json');
+                request.open('POST', url, /* async = */ false);
+                request.setRequestHeader('Content-Type', 'application/json');
 
-            request.onloadend = function() {
-                if (request.status != 200) { // analyze HTTP status of the response
-                    alert(`Error ${request.status}: ${request.statusText}`); // e.g. 404: Not Found
-                } else { // show the result
-                    $("#send-messages").removeClass("disabled");
-                    sweetAlert(
-                        'Thank you!',
-                        'Your wish has been uploaded successfully!',
-                        'success'
-                    );
-                    var data = JSON.parse(this.responseText);
-                    form.reset(); //reset form after AJAX success or do something else
-                    var myModalEl = document.getElementById('modal-wishes');
-                    var modal = bootstrap.Modal.getInstance(myModalEl)
-                    modal.hide();
-                    renderContent(data.data_messages);
+                request.onloadend = function () {
+                    if (request.status != 200) { // analyze HTTP status of the response
+                        alert(`Error ${request.status}: ${request.statusText}`); // e.g. 404: Not Found
+                    } else { // show the result
+                        $("#send-messages").removeClass("disabled");
+                        sweetAlert(
+                            'Thank you!',
+                            'Your wish has been uploaded successfully!',
+                            'success'
+                        );
+                        var data = JSON.parse(this.responseText);
+                        form.reset(); //reset form after AJAX success or do something else
+                        var myModalEl = document.getElementById('modal-wishes');
+                        var modal = bootstrap.Modal.getInstance(myModalEl)
+                        modal.hide();
+                        renderContent(data.data_messages);
 
-                }
-            };
+                    }
+                };
 
-            var latestData = JSON.parse(localStorage.getItem("messagesDataf4a9"));
-            latestData.data_messages.push(Object.fromEntries(formData));
-            request.send(JSON.stringify(latestData));
-            localStorage.setItem("messagesDataf4a9", JSON.stringify(latestData));
+                var latestData = JSON.parse(localStorage.getItem("messagesDataf4a9"));
+                latestData.data_messages.push(Object.fromEntries(formData));
+                request.send(JSON.stringify(latestData));
+                localStorage.setItem("messagesDataf4a9", JSON.stringify(latestData));
 
+            } else {
+
+                var myModalEl = document.getElementById('modal-wishes');
+                var modal = bootstrap.Modal.getInstance(myModalEl)
+                modal.show();
+                $("#error-text").html('* Insert your name and messages');
+
+            }
         } else {
-
-            var myModalEl = document.getElementById('modal-wishes');
-            var modal = bootstrap.Modal.getInstance(myModalEl)
-            modal.show();
-            $("#error-text").html('* Insert your name and messages');
-
+            $("#error-text").html("* The invitation has expired, you can't give wishes.");
         }
 
     });
@@ -278,47 +294,50 @@ $(document).ready(function() {
     var form_rsvp = document.getElementById('form-rsvp');
     document.getElementById("send-rsvp").addEventListener("click", (e) => {
 
-        
-        if (document.getElementById('name_input').value != '' &&
-            document.getElementById('address').value != '') {
+        if (countDownDate > currentDate) {
+            if (document.getElementById('name_input').value != '' &&
+                document.getElementById('address').value != '') {
 
-            $("#send-rsvp").addClass("disabled");
-            $("#error-text-rsvp").html('');
+                $("#send-rsvp").addClass("disabled");
+                $("#error-text-rsvp").html('');
 
-            var request = new XMLHttpRequest();
-            var formData = new FormData(form_rsvp);
+                var request = new XMLHttpRequest();
+                var formData = new FormData(form_rsvp);
 
-            var url = "https://api.npoint.io/e0efc02c46fcdc069abe";
+                var url = "https://api.npoint.io/e0efc02c46fcdc069abe";
 
-            request.open('POST', url, /* async = */ false);
-            request.setRequestHeader('Content-Type', 'application/json');
+                request.open('POST', url, /* async = */ false);
+                request.setRequestHeader('Content-Type', 'application/json');
 
-            request.onloadend = function() {
-                if (request.status != 200) { // analyze HTTP status of the response
-                    alert(`Error ${request.status}: ${request.statusText}`); // e.g. 404: Not Found
-                } else { // show the result
-                    $("#send-rsvp").removeClass("disabled");
-                    $("#rsvp-box").html("<span class='rsvp-response-text poppins txt-shadow'>Thank you for submitting the response!</span>");
-                    sweetAlert(
-                        'Thank you!',
-                        'Your response has been sent successfully!',
-                        'success'
-                    );
-                    form_rsvp.reset(); //reset form after AJAX success or do something else
-                    var data = JSON.parse(this.responseText);
+                request.onloadend = function () {
+                    if (request.status != 200) { // analyze HTTP status of the response
+                        alert(`Error ${request.status}: ${request.statusText}`); // e.g. 404: Not Found
+                    } else { // show the result
+                        $("#send-rsvp").removeClass("disabled");
+                        $("#rsvp-box").html("<span class='rsvp-response-text poppins txt-shadow'>Thank you for submitting the response!</span>");
+                        sweetAlert(
+                            'Thank you!',
+                            'Your response has been sent successfully!',
+                            'success'
+                        );
+                        form_rsvp.reset(); //reset form after AJAX success or do something else
+                        var data = JSON.parse(this.responseText);
 
-                }
-            };
+                    }
+                };
 
-            var latestData = JSON.parse(localStorage.getItem("RSVPDataf4a9"));
-            latestData.data_invitee.push(Object.fromEntries(formData));
-            request.send(JSON.stringify(latestData));
-            localStorage.setItem("RSVPDataf4a9", JSON.stringify(latestData));
+                var latestData = JSON.parse(localStorage.getItem("RSVPDataf4a9"));
+                latestData.data_invitee.push(Object.fromEntries(formData));
+                request.send(JSON.stringify(latestData));
+                localStorage.setItem("RSVPDataf4a9", JSON.stringify(latestData));
 
+            } else {
+
+                $("#error-text-rsvp").html('* Insert your name and address');
+
+            }
         } else {
-
-            $("#error-text-rsvp").html('* Insert your name and address');
-
+            $("#error-text-rsvp").html('* The invitation has expired.');
         }
 
     });

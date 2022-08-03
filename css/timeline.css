@@ -8,6 +8,8 @@
     margin: 0;
     padding: 0;
     width: 100%;
+    z-index: 999;
+    position: relative;
   }
   .timeline h1, .timeline h2, .timeline h3, .timeline h4, .timeline h5, .timeline h6 {
     line-height: inherit;
@@ -28,7 +30,7 @@
     margin: 0 0 0.5em 0;
     text-transform: uppercase;
     white-space: nowrap;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cinzel', serif;
     font-size: 12px;
   }
   
@@ -41,7 +43,7 @@
     width: 15px;
   }
   .timeline-marker:before {
-    background: #6E8553;
+    background: #004742;
     border: 3px solid transparent;
     border-radius: 100%;
     content: "";
@@ -56,7 +58,7 @@
   .timeline-marker:after {
     content: "";
     width: 3px;
-    background: #DDECCC;
+    background: #20746E;
     display: block;
     position: absolute;
     top: 24px;
@@ -69,7 +71,7 @@
   
   .timeline-item:not(.period):hover .timeline-marker:before {
     background: transparent;
-    border: 3px solid #6E8553;
+    border: 3px solid #004742;
   }
   
   /*----- TIMELINE CONTENT -----*/
@@ -84,11 +86,13 @@
     line-height: 1.5rem;
   }
   .timeline-content {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cinzel', serif;
   }
   .timeline-content .timeline-title {
     font-size: 24px;
-    font-family: 'Water Brush', cursive;
+    font-family: 'Signatie';
+    font-weight: normal;
+    font-style: normal;
   }
   /*----- TIMELINE PERIOD -----*/
   .period {

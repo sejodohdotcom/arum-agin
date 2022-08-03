@@ -35,18 +35,18 @@ var x = setInterval(function () {
 
 $(document).ready(function () {
 
-    // $('body').addClass('loaded');
+    $('body').addClass('loaded');
 
     //===== Prealoder
 
-    window.onload = function () {
-        window.setTimeout(fadeout, 500);
-    }
+    // window.onload = function () {
+    //     window.setTimeout(fadeout, 500);
+    // }
 
-    function fadeout() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.display = 'none';
-    }
+    // function fadeout() {
+    //     document.querySelector('.preloader').style.opacity = '0';
+    //     document.querySelector('.preloader').style.display = 'none';
+    // }
 
     var modalEnvelope = document.getElementById('open-envelope')
 

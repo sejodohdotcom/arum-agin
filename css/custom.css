@@ -115,6 +115,7 @@
 } */
 .doa-background-parent,
 .info-background,
+.covid-info-section,
 .footer {
     background: #004742;
 }
@@ -137,7 +138,7 @@
 
 .couple-text h1,
 .timeline h1 {
-    font-size: 40px;
+    font-size: 32px;
     padding: 1rem 0;
 }
 
@@ -748,7 +749,7 @@ body {
 }
 
 .card-title {
-    font-size: 40px;
+    font-size: 32px;
     padding: 1rem 0;
 }
 
